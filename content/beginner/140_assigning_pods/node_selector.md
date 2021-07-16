@@ -19,9 +19,9 @@ Output will be like
 
 {{< output >}}
 NAME                                          STATUS   ROLES    AGE    VERSION
-ip-192-168-15-67.us-east-2.compute.internal   Ready    <none>   3d5h   v1.17.12-eks-7684af
-ip-192-168-58-41.us-east-2.compute.internal   Ready    <none>   3d5h   v1.17.12-eks-7684af
-ip-192-168-95-39.us-east-2.compute.internal   Ready    <none>   3d5h   v1.17.12-eks-7684af
+ip-192-168-120-42.us-east-2.compute.internal    Ready    <none>   4m25s   v1.20.4-eks-6b7464
+ip-192-168-149-120.us-east-2.compute.internal   Ready    <none>   3m58s   v1.20.4-eks-6b7464
+ip-192-168-168-227.us-east-2.compute.internal   Ready    <none>   4m21s   v1.20.4-eks-6b7464
 {{< /output >}}
 
 We will add a new label `disktype=ssd` to the first node on this list.
@@ -51,7 +51,7 @@ kubectl label nodes ${FIRST_NODE_NAME} disktype=ssd
 Output example
 
 {{< output >}}
-node/ip-192-168-15-67.us-east-2.compute.internal labeled
+node/ip-192-168-120-42.us-east-2.compute.internal labeled
 {{< /output >}}
 
 We can verify that it worked by re-running the `kubectl get nodes --selector` command
@@ -63,8 +63,8 @@ kubectl get nodes --selector disktype=ssd
 Output example
 
 {{< output >}}
-NAME                                          STATUS   ROLES    AGE    VERSION
-ip-192-168-15-67.us-east-2.compute.internal   Ready    <none>   3d6h   v1.17.12-eks-7684af
+NAME                                            STATUS   ROLES    AGE    VERSION
+ip-192-168-120-42.us-east-2.compute.internal    Ready    <none>   4m25s   v1.20.4-eks-6b7464
 {{< /output >}}
 
 ### Deploy a nginx pod only to the node with the new label
@@ -105,7 +105,7 @@ Sample Output
 
 {{< output >}}
 NAME    READY   STATUS              RESTARTS   AGE   IP       NODE                                          NOMINATED NODE   READINESS GATES
-nginx   0/1     ContainerCreating   0          4s    <none>   ip-192-168-15-67.us-east-2.compute.internal   <none>           <none>
+nginx   0/1     ContainerCreating   0          4s    <none>   ip-192-168-120-42.us-east-2.compute.internal  <none>           <none>
 {{< /output >}}
 
 The `NODE` name should match the output of the command below
@@ -118,5 +118,5 @@ Sample Output
 
 {{< output >}}
 NAME                                          STATUS   ROLES    AGE    VERSION
-ip-192-168-15-67.us-east-2.compute.internal   Ready    <none>   3d6h   v1.17.12-eks-7684af
+ip-192-168-120-42.us-east-2.compute.internal    Ready    <none>   4m25s   v1.20.4-eks-6b7464
 {{< /output >}}
